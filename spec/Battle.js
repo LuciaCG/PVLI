@@ -1,6 +1,6 @@
 var mockery = require('mockery');
 
-xdescribe('Battle type', function () {
+describe('Battle type', function () {
   'use strict';
 
   var Battle;
@@ -78,7 +78,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Turn list', function () {
+  describe('Turn list', function () {
 
     it('includes all the characters sorted by initiative.', function (done) {
       var sortedByInitiative = ['Fasty', 'Tank', 'Wizz'];
