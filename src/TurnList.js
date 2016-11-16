@@ -22,7 +22,7 @@ TurnList.prototype.next = function () {
   var flag = true;
 
   while (flag && acu < this.list.length){
-    if (!this._charactersById[this.list[acu]]._isDead){ //si no esta muerto
+    if (!this._charactersById[this.list[acu]].isDead()){ //si no esta muerto
       obj.number = this.turnNumber; //esto esta bien
       this.activeCharacterId = this.list[acu];
       obj.activeCharacterId = this.activeCharacterId;
@@ -31,8 +31,8 @@ TurnList.prototype.next = function () {
     }
     acu++;
   }
-
   return obj;
+  
 };
 
 TurnList.prototype._sortByInitiative = function () {

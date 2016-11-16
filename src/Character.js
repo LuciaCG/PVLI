@@ -20,7 +20,6 @@ Character.prototype._immuneToEffect = ['name', 'weapon'];
 
 Character.prototype.isDead = function () {
 	if(this._hp <= 0) return true;
-	
 	else return false;
 };
 
