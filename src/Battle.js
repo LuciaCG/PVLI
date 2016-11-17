@@ -151,10 +151,13 @@ Battle.prototype._checkEndOfBattle = function () {
     // de que no haya común.
     var party = characters[0].party;
     var flag = true;
-    var aux = 0;
+    var aux = 1;
+
     while (flag && aux < characters.length){
-      if (characters[aux].party != party)
+
+      if (characters[aux].party !== party){
         flag = false;
+      }
       ++aux
     }
     if (flag) return party;
@@ -216,6 +219,7 @@ Battle.prototype._attack = function () {
   self._showTargets(function onTarget(targetId) {
     // Implementa lo que pasa cuando se ha seleccionado el objetivo.
     self._action.targetId = targetId;
+    self._action.effect = self._charactersById[self._action.activeCharacterId].weapon.extraEffect;
     self._executeAction();
     self._restoreDefense(targetId);
   });
@@ -233,7 +237,7 @@ Battle.prototype._cast = function () {
     self._charactersById[self._turns.activeCharacterId].mp -= scroll.cost;
     self._showTargets(function onTarget(targetId){
       self._action.targetId = targetId;
-      self._action.scrollId = scrollId;
+      self._action.scrollName = scrollId;
       self._action.effect = scroll.effect;
       self._executeAction();
       self._restoreDefense(targetId);
@@ -276,7 +280,7 @@ Battle.prototype._showScrolls = function (onSelection) {
   // Toma ejemplo de la función anterior para mostrar los hechizos. Estudia
   // bien qué parámetros se envían a los listener del evento chose.
   var spells = {};
-  var allSpells = this._grimoires[this._charactersById[this._action.activeCharacterId].party];
+  var allSpells = this._grimoires[this._charactersById[this._turns.activeCharacterId].party];
   for (var i in allSpells)
     if (allSpells[i].canBeUsed(this._charactersById[this._turns.activeCharacterId].mp)){
       spells[i] = allSpells[i];
