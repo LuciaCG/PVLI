@@ -17,22 +17,26 @@ TurnList.prototype.next = function () {
   // muertos.
   var obj = { number: 0, party: null, activeCharacterId: null };
 
+  var acu = this.turnNumber;
   this.turnNumber++;
-  var acu = 0;
-  var flag = true;
+  var flag = true; //si se encuentra al objeto
+  var aux;
 
-  while (flag && acu < this.list.length){
-    if (!this._charactersById[this.list[acu]].isDead()){ //si no esta muerto
-      obj.number = this.turnNumber; //esto esta bien
+  while (flag){
+    acu = (acu % this.list.length);
+
+    aux = this._charactersById[this.list[acu]].isDead();
+    if (!aux){
       this.activeCharacterId = this.list[acu];
-      obj.activeCharacterId = this.activeCharacterId;
-      obj.party = this._charactersById[obj.activeCharacterId].party;
       flag = false;
     }
     acu++;
   }
+  obj.number = this.turnNumber;
+  obj.activeCharacterId = this.activeCharacterId;
+  obj.party = this._charactersById[obj.activeCharacterId].party;
+
   return obj;
-  
 };
 
 TurnList.prototype._sortByInitiative = function () {

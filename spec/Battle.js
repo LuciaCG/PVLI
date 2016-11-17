@@ -209,7 +209,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('increases the odds of defending against attack.', function (done) {
+      it('increases the odds of defending against attack.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -234,7 +234,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('increases the odds of defending against cast.', function (done) {
+      it('increases the odds of defending against cast.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -263,7 +263,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('accumulates turn by turn.', function (done) {
+      it('accumulates turn by turn.', function (done) {
         var currentDefense = fastEnemy.defense;
         var expectedDefense =
             Math.ceil(Math.ceil(currentDefense * 1.1) * 1.1);
@@ -288,9 +288,9 @@ describe('Battle type', function () {
 
     });
 
-    xdescribe('Attack action', function () {
+    describe('Attack action', function () {
 
-      xit('requires to choose a target character.', function (done) {
+      it('requires to choose a target character.', function (done) {
         battle.on('turn', function () {
           this.options.select('attack');
           expect(this.options.list()).toEqual(jasmine.arrayContaining([
@@ -304,7 +304,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('does not allow to choose a dead character.', function (done) {
+      it('does not allow to choose a dead character.', function (done) {
         currentSetup.heroes.members[1].hp = 0;
         battle.setup(currentSetup);
 
@@ -321,7 +321,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('applies weapon effect if defense roll fails.', function (done) {
+      it('applies weapon effect if defense roll fails.', function (done) {
         fakeD100 = 100;
         var tankHealth = heroTank.hp;
         var clawsDamage = fastEnemy.weapon.effect.hp;
